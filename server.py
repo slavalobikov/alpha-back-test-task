@@ -34,7 +34,6 @@ def create_element():
     data.append(new_element)
     return jsonify(new_element)
 
-
 @app.route('/users/<int:user_id>', methods=['PUT'])
 def update_element(user_id):
     for item in data:
