@@ -8,9 +8,9 @@ CORS(app, support_credentials=True)
 
 
 data = [
-    {"id": 1, "name": "John Doe", "age": 24},
-    {"id": 2, "name": "John Doe", "age": 32},
-    {"id": 3, "name": "John Doe", "age:": 44}
+    {"id": 1, "name": "John Doe", "age": 24, "photo": ""},
+    {"id": 2, "name": "John Doe", "age": 32, "photo": ""},
+    {"id": 3, "name": "John Doe", "age:": 44, "photo": ""}
 ]
 
 
@@ -29,7 +29,7 @@ def get_element(user_id):
 
 @app.route('/users', methods=['POST'])
 def create_element():
-    new_element = {"id": len(data) + 1, "name": request.json['name'], "age": request.json['age']}
+    new_element = {"id": len(data) + 1, "name": request.json['name'], "age": request.json['age'], "photo": request.json['photo']}
     data.append(new_element)
     return jsonify(new_element)
 
@@ -39,6 +39,7 @@ def update_element(user_id):
     for item in data:
         if item['id'] == user_id:
             item['name'] = request.json['name']
+            item['photo'] = request.json['photo']
             return jsonify(item)
     return jsonify({"message": "Item not found"})
 
