@@ -8,9 +8,9 @@ CORS(app, support_credentials=True)
 
 
 data = [
-    {"id": 1, "name": "John Doe", "age": 24, "photo": ""},
-    {"id": 2, "name": "John Doe", "age": 32, "photo": ""},
-    {"id": 3, "name": "John Doe", "age:": 44, "photo": ""}
+    {"id": 1, "name": "John Doe", "age": 24, "photo": "", "job_title": "", "bio": ""},
+    {"id": 2, "name": "John Doe", "age": 32, "photo": "", "job_title": "", "bio": ""},
+    {"id": 3, "name": "John Doe", "age": 44, "photo": "", "job_title": "", "bio": ""}
 ]
 
 
@@ -29,7 +29,8 @@ def get_element(user_id):
 
 @app.route('/users', methods=['POST'])
 def create_element():
-    new_element = {"id": len(data) + 1, "name": request.json['name'], "age": request.json['age'], "photo": request.json['photo']}
+    new_element = {"id": len(data) + 1, "name": request.json['name'], "age": request.json['age'],
+                   "photo": request.json['photo'], "job_title": request.json['job_title'], "bio": request.json['bio']}
     data.append(new_element)
     return jsonify(new_element)
 
@@ -40,6 +41,8 @@ def update_element(user_id):
         if item['id'] == user_id:
             item['name'] = request.json['name']
             item['photo'] = request.json['photo']
+            item['job_title'] = request.json['job_title']
+            item['bio'] = request.json['bio']
             return jsonify(item)
     return jsonify({"message": "Item not found"})
 
