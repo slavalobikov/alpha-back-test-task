@@ -31,6 +31,7 @@ def get_element(user_id):
 def create_element():
     new_element = {"id": len(data) + 1, "name": request.json['name'], "age": request.json['age'],
                    "photo": request.json['photo'], "job_title": request.json['job_title'], "bio": request.json['bio']}
+    print(request)
     data.append(new_element)
     return jsonify(new_element)
 
@@ -39,6 +40,7 @@ def update_element(user_id):
     for item in data:
         if item['id'] == user_id:
             item['name'] = request.json['name']
+            item['age'] = request.json['age']
             item['photo'] = request.json['photo']
             item['job_title'] = request.json['job_title']
             item['bio'] = request.json['bio']
